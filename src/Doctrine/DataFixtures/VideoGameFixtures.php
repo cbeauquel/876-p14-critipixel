@@ -54,13 +54,10 @@ final class VideoGameFixtures extends Fixture implements DependentFixtureInterfa
             ->setImageSize(2_098_872);
 
             $randomTags = $this->faker->randomElements($tags, rand(1, 3));
-                // Ajout aléatoire de tags
-                foreach ($randomTags as $tag) {
-                    $videoGame->addTag($tag);
-                }
-
-            $this->calculateAverageRating->calculateAverage($videoGame);
-            $this->countRatingsPerValue->countRatingsPerValue($videoGame);
+            // Ajout aléatoire de tags
+            foreach ($randomTags as $tag) {
+                $videoGame->addTag($tag);
+            }
 
             $manager->persist($videoGame);
 
@@ -81,6 +78,12 @@ final class VideoGameFixtures extends Fixture implements DependentFixtureInterfa
                 ->setVideoGame($this->faker->randomElement($videoGames))
                 ->setRating($this->faker->numberBetween(1, 5))
                 ->setComment($this->faker->paragraphs(1, true));
+
+            $this->calculateAverageRating->calculateAverage($videoGame);
+            $this->countRatingsPerValue->countRatingsPerValue($videoGame);
+    
+
+
             $manager->persist($review);
 
         }
