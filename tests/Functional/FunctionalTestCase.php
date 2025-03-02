@@ -40,7 +40,12 @@ abstract class FunctionalTestCase extends WebTestCase
         return $this->client->request('GET', $uri, $parameters);
     }
 
-    protected function login(string $email = 'user+0@email.com'): void
+    protected function post(string $uri, array $parameters = []): Crawler
+    {
+        return $this->client->request('POST', $uri, $parameters);
+    }
+
+    protected function login(string $email = 'user+2@email.com'): void
     {
         $user = $this->service(EntityManagerInterface::class)->getRepository(User::class)->findOneByEmail($email);
 
