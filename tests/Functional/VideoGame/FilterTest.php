@@ -27,7 +27,10 @@ final class FilterTest extends FunctionalTestCase
         self::assertSelectorCount(1, 'article.game-card');
     }
 
-    public function testShouldFilterVideoGamesByTag(): void
+    /**
+     * @dataProvider provideVideoGameTags
+     */
+    public function testShouldFilterVideoGamesByTag($tags, $tagCount): void
     {
         $this->get('/');
         $this->assertResponseIsSuccessful();
@@ -37,23 +40,23 @@ final class FilterTest extends FunctionalTestCase
         $this->assertResponseIsSuccessful();
 
         // // Envoi du formulaire de tri par tag
-        $form = $this->get('/')->selectButton('Filtrer')->form();
-        $form['filter[tags]'] = ['1'];
+         $this->client->submitForm('Filtrer', 
+            $tags, 
+            'GET');
 
-        $this->client->submit($form);
-        $this->assertSelectorCount(13, 'article.game-card');
+        $this->assertSelectorCount($tagCount, 'article.game-card');
     }
 
-    // public function provideVideoGameTags(): array
-    // {
-    //     return [
-    //         'multijoueur' => [['120' => 'multijoueur'], 13],
-    //         'solo' => [['121' => 'solo'], 17],
-    //         'en ligne' => [['122' => 'en ligne'], 11],
-    //         'hors ligne' => [['123' => 'hors ligne'], 15],
-    //         'coopératif' => [['124' => 'coopératif'], 17],
-    //         'compétitif' => [['125' => 'compétitif'], 19],
-    //     ];
-    // }
+    public function provideVideoGameTags(): array
+    {
+        return [
+            [['filter[tags][0]' => '7'], 15],
+            [['filter[tags][1]' => '8'], 25],
+            [['filter[tags][2]' => '9'], 18],
+            [['filter[tags][3]' => '10'], 13],
+            [['filter[tags][4]' => '11'], 19],
+            [['filter[tags][5]' => '12'], 21],
+        ];
+    }
 
 }
