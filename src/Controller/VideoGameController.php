@@ -6,16 +6,20 @@ namespace App\Controller;
 
 use App\Form\ReviewType;
 use App\List\ListFactory;
-use App\List\VideoGameList\Pagination;
+use App\Model\Entity\User;
 use App\Model\Entity\Review;
 use App\Model\Entity\VideoGame;
+use App\List\VideoGameList\Pagination;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
+use function PHPUnit\Framework\throwException;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\ValueResolver;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+use Symfony\Component\HttpKernel\Attribute\ValueResolver;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/', name: 'video_games_')]
 final class VideoGameController extends AbstractController
@@ -35,16 +39,21 @@ final class VideoGameController extends AbstractController
     public function show(VideoGame $videoGame, EntityManagerInterface $entityManager, Request $request): Response
     {
         $review = new Review();
-
+        $user = $this->getUser();
+        
         $form = $this->createForm(ReviewType::class, $review)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($user instanceof User){
             $this->denyAccessUnlessGranted('review', $videoGame);
-            $review->setVideoGame($videoGame);
-            $review->setUser($this->getUser());
-            $entityManager->persist($review);
-            $entityManager->flush();
-            return $this->redirectToRoute('video_games_show', ['slug' => $videoGame->getSlug()]);
+                $review->setVideoGame($videoGame);
+                $review->setUser($user);
+                $entityManager->persist($review);
+                $entityManager->flush();
+                return $this->redirectToRoute('video_games_show', ['slug' => $videoGame->getSlug()]);
+            } else {
+                return new Response('L\'utilisateur doit être de type User');
+            }
         }
 
         return $this->render('views/video_games/show.html.twig', ['video_game' => $videoGame, 'form' => $form]);
