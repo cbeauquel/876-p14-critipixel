@@ -26,14 +26,14 @@ jobs:
             php8.2-composer-latest-
 
       - name: Update composer
-        run: composer selft-update
+        run: composer self-update
 
       - name: install deps
         run: composer install --prefer-dist --no-interation -- no-progress --
 
       - name: Quality analysis
         run: comoser app:code-quality
-        
+
 
 
         
