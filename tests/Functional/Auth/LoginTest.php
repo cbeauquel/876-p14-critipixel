@@ -13,10 +13,10 @@ final class LoginTest extends FunctionalTestCase
     {
         $this->get('/auth/login');
 
-        $this->client->submitForm('Se connecter', [
+        $this->client->submitForm('Se connecter', array(
             'email' => 'user+1@email.com',
             'password' => 'password'
-        ]);
+        ));
 
         $authorizationChecker = $this->service(AuthorizationCheckerInterface::class);
 
@@ -31,10 +31,10 @@ final class LoginTest extends FunctionalTestCase
     {
         $this->get('/auth/login');
 
-        $this->client->submitForm('Se connecter', [
+        $this->client->submitForm('Se connecter', array(
             'email' => 'user+1@email.com',
             'password' => 'fail'
-        ]);
+        ));
 
         $authorizationChecker = $this->service(AuthorizationCheckerInterface::class);
 

@@ -35,12 +35,12 @@ abstract class FunctionalTestCase extends WebTestCase
         return $this->client->getContainer()->get($id);
     }
 
-    protected function get(string $uri, array $parameters = []): Crawler
+    protected function get(string $uri, array $parameters = array()): Crawler
     {
         return $this->client->request('GET', $uri, $parameters);
     }
 
-    protected function post(string $uri, array $parameters = []): Crawler
+    protected function post(string $uri, array $parameters = array()): Crawler
     {
         return $this->client->request('POST', $uri, $parameters);
     }

@@ -17,24 +17,24 @@ final class FilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('search', TextType::class, [
+            ->add('search', TextType::class, array(
                 'label' => 'Rechercher',
                 'required' => false,
-                'attr' =>  [
+                'attr' => array(
                     'placeholder' => 'Rechercher...',
-                ],
-            ])
-            ->add('tags', EntityType::class, [
+                ),
+            ))
+            ->add('tags', EntityType::class, array(
                 'label' => 'Tags',
                 'required' => false,
                 'multiple' => true,
                 'expanded' => true,
                 'class' => Tag::class,
                 'choice_label' => 'name',
-                'attr' =>  [
+                'attr' => array(
                     'class' => 'd-flex gap-2 flex-wrap',
-                ],
-            ]);
+                ),
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

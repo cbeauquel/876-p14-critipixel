@@ -51,7 +51,7 @@ class VideoGame
     private ?File $imageFile = null;
 
     #[Column(unique: true)]
-    #[Slug(fields: ['title'])]
+    #[Slug(fields: array('title'))]
     private string $slug;
 
     #[NotBlank]

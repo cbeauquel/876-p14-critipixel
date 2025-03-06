@@ -19,14 +19,14 @@ final readonly class PaginationValueResolver implements ValueResolverInterface
         $argumentType = $argument->getType();
 
         if ($argumentType !== Pagination::class) {
-            return [];
+            return array();
         }
 
-        return [new Pagination(
+        return array(new Pagination(
             $request->query->getInt('page', 1),
             $request->query->getInt('limit', 10),
             Sorting::tryFromName($request->query->get('sorting', '')) ?? Sorting::ReleaseDate,
             Direction::tryFromName($request->query->get('direction', '')) ?? Direction::Descending,
-        )];
+        ));
     }
 }

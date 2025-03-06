@@ -23,7 +23,7 @@ class Tag
     private ?int $id = null;
 
     #[Column(unique: true)]
-    #[Slug(fields: ['name'])]
+    #[Slug(fields: array('name'))]
     private string $code;
 
     #[NotBlank]

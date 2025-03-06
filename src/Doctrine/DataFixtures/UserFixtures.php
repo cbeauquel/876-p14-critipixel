@@ -11,16 +11,16 @@ final class UserFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $users = [];
-        for($i = 0; $i < 10; $i++){
-        $user = (new User())
-            ->setEmail(sprintf('user+%d@email.com', $i))
-            ->setPlainPassword('password')
-            ->setUsername(sprintf('user+%d', $i));
-        $manager->persist($user);
+        $users = array();
+        for ($i = 0; $i < 10; $i++) {
+            $user = (new User())
+                ->setEmail(sprintf('user+%d@email.com', $i))
+                ->setPlainPassword('password')
+                ->setUsername(sprintf('user+%d', $i));
+            $manager->persist($user);
 
-        $users[] = $user;
-    };
+            $users[] = $user;
+        };
         $manager->flush();
     }
 }

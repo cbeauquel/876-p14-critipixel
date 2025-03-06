@@ -31,10 +31,10 @@ final class Pagination implements IteratorAggregate, Countable
     private array $pages;
 
     public function __construct(
-        private int $page,
-        private int $limit,
-        private Sorting $sorting,
-        private Direction $direction
+        private readonly int $page,
+        private readonly int $limit,
+        private readonly Sorting $sorting,
+        private readonly Direction $direction
     ) {
     }
 
@@ -134,12 +134,12 @@ final class Pagination implements IteratorAggregate, Countable
      */
     public function toArray(): array
     {
-        return [
+        return array(
             'page' => $this->page,
             'limit' => $this->limit,
             'sorting' => $this->sorting->name,
             'direction' => $this->direction->name,
-        ];
+        );
     }
 
     public function count(): int

@@ -25,6 +25,12 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <exclude>
+            <directory>src/Kernel.php</directory>
+        </exclude>
+        <report>
+            <html outputDirectory="var/coverage"/>
+        </report>
     </coverage>
 
     <listeners>

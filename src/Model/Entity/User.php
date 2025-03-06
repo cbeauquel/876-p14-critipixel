@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints\PasswordStrength;
 #[Table('`user`')]
 #[UniqueEntity('email')]
 #[UniqueEntity('username')]
-#[EntityListeners([UserListener::class])]
+#[EntityListeners(array(UserListener::class))]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[Id]
@@ -103,7 +103,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        return array('ROLE_USER');
     }
 
     public function eraseCredentials(): void

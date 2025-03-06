@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use App\Model\Entity\Review;
-use App\Rating\RatingHandler;
 use App\Model\Entity\VideoGame;
+use App\Rating\RatingHandler;
 use PHPUnit\Framework\TestCase;
 
 class CountRatingPerValueTest extends TestCase
@@ -12,7 +12,7 @@ class CountRatingPerValueTest extends TestCase
     public function testCountRatingsPerValueNoReviews(): void
     {
         $videoGame = new VideoGame();
-        $ratingHandler = new RatingHandler;
+        $ratingHandler = new RatingHandler();
 
         $ratingHandler->countRatingsPerValue($videoGame);
 
@@ -30,7 +30,7 @@ class CountRatingPerValueTest extends TestCase
     public function testCountRatingsPerValueReviews(array $ratings, int $expectedOne, int $expectedTwo, int $expectedThree, int $expectedFour, int $expectedFive): void
     {
         $videoGame = new VideoGame();
-        $ratingHandler = new RatingHandler;
+        $ratingHandler = new RatingHandler();
 
         foreach ($ratings as $rating) {
             $videoGame->getReviews()->add((new Review())->setRating($rating));
@@ -47,39 +47,39 @@ class CountRatingPerValueTest extends TestCase
 
     public function provideRatingsData(): array
     {
-        return [
-            'exemple 1' => [
-                'ratings' => [1, 3, 5, 5],
+        return array(
+            'exemple 1' => array(
+                'ratings' => array(1, 3, 5, 5),
                 'expectedOne' => 1,
                 'expectedTwo' => 0,
                 'expectedThree' => 1,
                 'expectedFour' => 0,
                 'expectedFive' => 2,
-            ],
-            'exemple 2' => [
-                'ratings' => [2, 2, 4, 4, 4],
+            ),
+            'exemple 2' => array(
+                'ratings' => array(2, 2, 4, 4, 4),
                 'expectedOne' => 0,
                 'expectedTwo' => 2,
                 'expectedThree' => 0,
                 'expectedFour' => 3,
                 'expectedFive' => 0,
-            ],
-            'exemple 3' => [
-                'ratings' => [1, 2, 3, 4, 5],
+            ),
+            'exemple 3' => array(
+                'ratings' => array(1, 2, 3, 4, 5),
                 'expectedOne' => 1,
                 'expectedTwo' => 1,
                 'expectedThree' => 1,
                 'expectedFour' => 1,
                 'expectedFive' => 1,
-            ],
-            'exemple 4' => [
-                'ratings' => [5, 5, 5, 5, 5],
+            ),
+            'exemple 4' => array(
+                'ratings' => array(5, 5, 5, 5, 5),
                 'expectedOne' => 0,
                 'expectedTwo' => 0,
                 'expectedThree' => 0,
                 'expectedFour' => 0,
                 'expectedFive' => 5,
-            ],
-        ];
+            ),
+        );
     }
 }

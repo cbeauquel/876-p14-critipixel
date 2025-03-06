@@ -22,22 +22,22 @@ final class ReviewType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('rating', ChoiceType::class, [
+            ->add('rating', ChoiceType::class, array(
                 'label' => 'Note',
-                'choices' => [
+                'choices' => array(
                     '1' => 1,
                     '2' => 2,
                     '3' => 3,
                     '4' => 4,
                     '5' => 5,
-                ]
-            ])
-            ->add('comment', TextareaType::class, [
+                )
+            ))
+            ->add('comment', TextareaType::class, array(
                 'label' => 'Commentaire',
                 'required' => false,
-                'attr' => [
+                'attr' => array(
                     'placeholder' => 'Commentaire',
-                ]
-            ]);
+                )
+            ));
     }
 }

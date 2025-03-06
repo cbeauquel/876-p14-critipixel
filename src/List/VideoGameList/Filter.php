@@ -13,7 +13,7 @@ final class Filter
      */
     public function __construct(
         private ?string $search = null,
-        private array $tags = []
+        private array $tags = array()
     ) {
     }
 
@@ -31,7 +31,7 @@ final class Filter
     /**
      * @return (string)[] $tags
      */
-    public function getTags(): array 
+    public function getTags(): array
     {
         return $this->tags;
     }
