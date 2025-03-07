@@ -26,6 +26,7 @@ class CountRatingPerValueTest extends TestCase
 
     /**
      * @dataProvider provideRatingsData
+     * @param array<string|int> $ratings
      */
     public function testCountRatingsPerValueReviews(array $ratings, int $expectedOne, int $expectedTwo, int $expectedThree, int $expectedFour, int $expectedFive): void
     {
@@ -45,6 +46,9 @@ class CountRatingPerValueTest extends TestCase
         $this->assertEquals($expectedFive, $videoGame->getNumberOfRatingsPerValue()->getNumberOfFive());
     }
 
+    /**
+    * @return array<string, array<string, int|list<int>>>
+    */
     public function provideRatingsData(): array
     {
         return array(

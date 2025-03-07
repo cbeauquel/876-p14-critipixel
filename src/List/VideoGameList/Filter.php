@@ -29,7 +29,7 @@ final class Filter
     }
 
     /**
-     * @return (string)[] $tags
+     * @return (object)[] $tags
      */
     public function getTags(): array
     {
@@ -37,7 +37,7 @@ final class Filter
     }
 
     /**
-     * @param (string)[] $tags
+     * @param (object)[] $tags
      */
     public function setTags(array $tags): Filter
     {

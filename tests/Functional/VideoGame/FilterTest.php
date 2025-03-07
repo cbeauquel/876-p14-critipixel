@@ -29,8 +29,9 @@ final class FilterTest extends FunctionalTestCase
 
     /**
      * @dataProvider provideVideoGameTags
+     * @param array<string|int> $tags
      */
-    public function testShouldFilterVideoGamesByTag($tags, $tagCount): void
+    public function testShouldFilterVideoGamesByTag(array $tags, int $tagCount): void
     {
         $this->get('/');
         $this->assertResponseIsSuccessful();
@@ -50,6 +51,9 @@ final class FilterTest extends FunctionalTestCase
         $this->assertSelectorCount($tagCount, 'article.game-card');
     }
 
+    /**
+    * @return array<int, array<int, array<string, string>|int>>
+    */
     public function provideVideoGameTags(): array
     {
         return array(

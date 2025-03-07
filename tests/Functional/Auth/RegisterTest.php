@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Auth;
 
+use Generator;
 use App\Model\Entity\User;
 use App\Tests\Functional\FunctionalTestCase;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -30,6 +31,7 @@ final class RegisterTest extends FunctionalTestCase
 
     /**
      * @dataProvider provideInvalidFormData
+     * @param string[] $formData
      */
     public function testThatRegistrationShouldFailed(array $formData): void
     {
@@ -40,6 +42,9 @@ final class RegisterTest extends FunctionalTestCase
         self::assertResponseIsUnprocessable();
     }
 
+    /**
+     * @return Generator<array<int, array<string>>>
+     */
     public static function provideInvalidFormData(): iterable
     {
         yield 'empty username' => array(self::getFormData(array('register[username]' => '')));
@@ -50,6 +55,10 @@ final class RegisterTest extends FunctionalTestCase
         yield 'invalid email' => array(self::getFormData(array('register[email]' => 'fail')));
     }
 
+    /**
+     * @param string[] $overrideData
+     * @return string[]
+     */
     public static function getFormData(array $overrideData = array()): array
     {
         return array(

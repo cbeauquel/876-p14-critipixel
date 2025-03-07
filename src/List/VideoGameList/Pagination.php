@@ -104,7 +104,7 @@ final class Pagination implements IteratorAggregate, Countable
     }
 
     /**
-     * @return (string)[]
+     * @return (int|object)[]
      */
     public function getDirections(): array
     {
@@ -112,7 +112,7 @@ final class Pagination implements IteratorAggregate, Countable
     }
 
     /**
-     * @return (string)[]
+     * @return (int|object)[]
      */
     public function getAllSorting(): array
     {

@@ -28,21 +28,18 @@ abstract class FunctionalTestCase extends WebTestCase
     /**
      * @template T
      * @param class-string<T> $id
-     * @return T
      */
     protected function service(string $id): object
     {
         return $this->client->getContainer()->get($id);
     }
 
+    /**
+     * @param string[] $parameters
+     */
     protected function get(string $uri, array $parameters = array()): Crawler
     {
         return $this->client->request('GET', $uri, $parameters);
-    }
-
-    protected function post(string $uri, array $parameters = array()): Crawler
-    {
-        return $this->client->request('POST', $uri, $parameters);
     }
 
     protected function login(string $email = 'user+2@email.com'): void
