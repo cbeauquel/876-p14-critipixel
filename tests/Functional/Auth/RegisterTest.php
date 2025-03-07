@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Auth;
 
-use Generator;
 use App\Model\Entity\User;
 use App\Tests\Functional\FunctionalTestCase;
+use Generator;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 final class RegisterTest extends FunctionalTestCase
