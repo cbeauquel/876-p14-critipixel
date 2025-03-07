@@ -13,7 +13,7 @@ return ECSConfig::configure()
     ])
     ->withConfiguredRule(
         ArraySyntaxFixer::class,
-        ['syntax' => 'long']
+        ['syntax' => 'short']
     )
     // add a single rule
     ->withRules([
@@ -28,5 +28,4 @@ return ECSConfig::configure()
         // docblocks: true,
         // comments: true,
     // )
-     
      ;
