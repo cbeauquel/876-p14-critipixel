@@ -16,17 +16,17 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 #[Route('/auth', name: 'auth_')]
 final class AuthController extends AbstractController
 {
-    #[Route('/login', name: 'login', methods: array(Request::METHOD_GET, Request::METHOD_POST))]
+    #[Route('/login', name: 'login', methods: [Request::METHOD_GET, Request::METHOD_POST])]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        return $this->render('views/auth/login.html.twig', array(
+        return $this->render('views/auth/login.html.twig', [
             'controller_name' => 'LoginController',
             'last_username' => $authenticationUtils->getLastUsername(),
             'error' => $authenticationUtils->getLastAuthenticationError(),
-        ));
+        ]);
     }
 
-    #[Route('/register', name: 'register', methods: array(Request::METHOD_GET, Request::METHOD_POST))]
+    #[Route('/register', name: 'register', methods: [Request::METHOD_GET, Request::METHOD_POST])]
     public function register(Request $request, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
@@ -40,6 +40,6 @@ final class AuthController extends AbstractController
             return $this->redirectToRoute('auth_login');
         }
 
-        return $this->render('views/auth/register.html.twig', array('form' => $form));
+        return $this->render('views/auth/register.html.twig', ['form' => $form]);
     }
 }

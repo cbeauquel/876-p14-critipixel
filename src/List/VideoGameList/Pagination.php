@@ -134,12 +134,12 @@ final class Pagination implements IteratorAggregate, Countable
      */
     public function toArray(): array
     {
-        return array(
+        return [
             'page' => $this->page,
             'limit' => $this->limit,
             'sorting' => $this->sorting->name,
             'direction' => $this->direction->name,
-        );
+        ];
     }
 
     public function count(): int

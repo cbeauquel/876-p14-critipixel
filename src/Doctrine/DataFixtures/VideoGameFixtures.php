@@ -25,13 +25,13 @@ final class VideoGameFixtures extends Fixture implements DependentFixtureInterfa
     ) {
     }
 
-    public const KEYWORDS = array('multijoueur', 'solo', 'en ligne', 'hors ligne', 'coopératif', 'compétitif');
+    public const KEYWORDS = ['multijoueur', 'solo', 'en ligne', 'hors ligne', 'coopératif', 'compétitif'];
 
     public function load(ObjectManager $manager): void
     {
         $users = $manager->getRepository(User::class)->findAll();
 
-        $tags = array();
+        $tags = [];
 
         // Création des tags
         foreach (self::KEYWORDS as $keyword) {
@@ -41,7 +41,7 @@ final class VideoGameFixtures extends Fixture implements DependentFixtureInterfa
             $tags[] = $tag;
         }
 
-        $videoGames = array();
+        $videoGames = [];
         // $videoGames = array_fill_callback(0, 50, fn (int $index): VideoGame => (new VideoGame)
         for ($i = 0; $i < 50; $i++) {
             $videoGame = (new VideoGame())
@@ -92,6 +92,6 @@ final class VideoGameFixtures extends Fixture implements DependentFixtureInterfa
 
     public function getDependencies(): array
     {
-        return array(UserFixtures::class);
+        return [UserFixtures::class];
     }
 }

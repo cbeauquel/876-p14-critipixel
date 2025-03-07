@@ -25,10 +25,10 @@ final class ShowTest extends FunctionalTestCase
         $this->assertResponseIsSuccessful();
         
         // Envoi du formulaire de review
-        $this->client->submitForm('Poster', array(
+        $this->client->submitForm('Poster', [
             'review[rating]' => '2',
             'review[comment]' => 'ceci est un test'
-        ));
+        ]);
         
         // Vérification de la redirection après soumission du formulaire
         $this->assertResponseStatusCodeSame(302);

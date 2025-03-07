@@ -13,7 +13,7 @@ final class Filter
      */
     public function __construct(
         private ?string $search = null,
-        private array $tags = array()
+        private array $tags = []
     ) {
     }
 

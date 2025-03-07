@@ -22,23 +22,23 @@ final class RegisterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('username', TextType::class, array(
+            ->add('username', TextType::class, [
                 'label' => 'Pseudo',
-                'attr' => array(
+                'attr' => [
                     'placeholder' => 'Pseudo',
-                )
-            ))
-            ->add('email', EmailType::class, array(
+                ]
+            ])
+            ->add('email', EmailType::class, [
                 'label' => 'Email',
-                'attr' => array(
+                'attr' => [
                     'placeholder' => 'Email',
-                )
-            ))
-            ->add('plainPassword', PasswordType::class, array(
+                ]
+            ])
+            ->add('plainPassword', PasswordType::class, [
                 'label' => 'Mot de passe',
-                'attr' => array(
+                'attr' => [
                     'placeholder' => 'Mot de passe',
-                )
-            ));
+                ]
+            ]);
     }
 }

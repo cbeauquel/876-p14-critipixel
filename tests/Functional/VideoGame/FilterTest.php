@@ -22,7 +22,7 @@ final class FilterTest extends FunctionalTestCase
         $this->get('/');
         self::assertResponseIsSuccessful();
         self::assertSelectorCount(10, 'article.game-card');
-        $this->client->submitForm('Filtrer', array('filter[search]' => 'Jeu vidéo 49'), 'GET');
+        $this->client->submitForm('Filtrer', ['filter[search]' => 'Jeu vidéo 49'], 'GET');
         self::assertResponseIsSuccessful();
         self::assertSelectorCount(1, 'article.game-card');
     }
@@ -56,20 +56,20 @@ final class FilterTest extends FunctionalTestCase
     */
     public function provideVideoGameTags(): array
     {
-        return array(
-            array(array('filter[tags][0]' => '7'), 15),
-            array(array('filter[tags][1]' => '8'), 25),
-            array(array('filter[tags][2]' => '9'), 18),
-            array(array('filter[tags][3]' => '10'), 13),
-            array(array('filter[tags][4]' => '11'), 19),
-            array(array('filter[tags][5]' => '12'), 21),
-            array(array('filter[tags][0]' => '7', 'filter[tags][1]' => '8'), 10),
-            array(array('filter[tags][0]' => '7', 'filter[tags][2]' => '9'), 4),
-            array(array('filter[tags][0]' => '7', 'filter[tags][5]' => '12'), 6),
-            array(array('filter[tags][0]' => '7', 'filter[tags][1]' => '8', 'filter[tags][2]' => '9'), 2),
-            array(array('filter[tags][0]' => '7', 'filter[tags][1]' => '8', 'filter[tags][3]' => '10'), 3),
-            array(array('filter[tags][0]' => '7', 'filter[tags][1]' => '8', 'filter[tags][2]' => '9', 'filter[tags][3]' => '10'), 0),
+        return [
+            [['filter[tags][0]' => '7'], 15],
+            [['filter[tags][1]' => '8'], 25],
+            [['filter[tags][2]' => '9'], 18],
+            [['filter[tags][3]' => '10'], 13],
+            [['filter[tags][4]' => '11'], 19],
+            [['filter[tags][5]' => '12'], 21],
+            [['filter[tags][0]' => '7', 'filter[tags][1]' => '8'], 10],
+            [['filter[tags][0]' => '7', 'filter[tags][2]' => '9'], 4],
+            [['filter[tags][0]' => '7', 'filter[tags][5]' => '12'], 6],
+            [['filter[tags][0]' => '7', 'filter[tags][1]' => '8', 'filter[tags][2]' => '9'], 2],
+            [['filter[tags][0]' => '7', 'filter[tags][1]' => '8', 'filter[tags][3]' => '10'], 3],
+            [['filter[tags][0]' => '7', 'filter[tags][1]' => '8', 'filter[tags][2]' => '9', 'filter[tags][3]' => '10'], 0],
 
-        );
+        ];
     }
 }

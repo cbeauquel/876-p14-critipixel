@@ -62,10 +62,10 @@ final class VideoGamesList implements Countable, IteratorAggregate
             ->create(
                 FilterType::class,
                 $this->filter,
-                array(
+                [
                     'method' => Request::METHOD_GET,
                     'csrf_protection' => false,
-                )
+                ]
             )
             ->handleRequest($request)
             ->createView();
@@ -159,7 +159,7 @@ final class VideoGamesList implements Countable, IteratorAggregate
     {
         return $this->urlGenerator->generate(
             $this->route,
-            array('page' => $page) + $this->pagination->toArray() + $this->routeParameters
+            ['page' => $page] + $this->pagination->toArray() + $this->routeParameters
         );
     }
 }

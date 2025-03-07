@@ -47,24 +47,24 @@ final class RegisterTest extends FunctionalTestCase
      */
     public static function provideInvalidFormData(): iterable
     {
-        yield 'empty username' => array(self::getFormData(array('register[username]' => '')));
-        yield 'non unique username' => array(self::getFormData(array('register[username]' => 'user+1')));
-        yield 'too long username' => array(self::getFormData(array('register[username]' => 'Lorem ipsum dolor sit amet orci aliquam')));
-        yield 'empty email' => array(self::getFormData(array('register[email]' => '')));
-        yield 'non unique email' => array(self::getFormData(array('register[email]' => 'user+1@email.com')));
-        yield 'invalid email' => array(self::getFormData(array('register[email]' => 'fail')));
+        yield 'empty username' => [self::getFormData(['register[username]' => ''])];
+        yield 'non unique username' => [self::getFormData(['register[username]' => 'user+1'])];
+        yield 'too long username' => [self::getFormData(['register[username]' => 'Lorem ipsum dolor sit amet orci aliquam'])];
+        yield 'empty email' => [self::getFormData(['register[email]' => ''])];
+        yield 'non unique email' => [self::getFormData(['register[email]' => 'user+1@email.com'])];
+        yield 'invalid email' => [self::getFormData(['register[email]' => 'fail'])];
     }
 
     /**
      * @param string[] $overrideData
      * @return string[]
      */
-    public static function getFormData(array $overrideData = array()): array
+    public static function getFormData(array $overrideData = []): array
     {
-        return array(
+        return [
             'register[username]' => 'username',
             'register[email]' => 'user@email.com',
             'register[plainPassword]' => 'SuperPassword123!'
-        ) + $overrideData;
+        ] + $overrideData;
     }
 }
