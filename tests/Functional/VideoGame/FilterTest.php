@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\VideoGame;
 
-use App\Tests\Functional\FunctionalTestCase;
 use App\List\VideoGamesList;
 use App\Model\ValueObject;
+use App\Tests\Functional\FunctionalTestCase;
 
 final class FilterTest extends FunctionalTestCase
 {

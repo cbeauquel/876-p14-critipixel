@@ -67,6 +67,10 @@ final class VideoGameRepository extends ServiceEntityRepository
         return new Paginator($queryBuilder, fetchJoinCollection: true);
     }
 
+    /**
+    * @return int
+    * @param int[] $tagIds
+    */
     public function countVideoGamePerFilter(array $tagIds): int
     {
         $qb = $this->createQueryBuilder('vg')
@@ -80,5 +84,4 @@ final class VideoGameRepository extends ServiceEntityRepository
 
         return count($qb->getQuery()->getResult());
     }
-
 }

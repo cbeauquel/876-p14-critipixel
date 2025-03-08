@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
+use App\Doctrine\Repository\VideoGameRepository;
 use App\Model\Entity\User;
 use App\Model\Entity\VideoGame;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DomCrawler\Crawler;
-use App\Doctrine\Repository\VideoGameRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DomCrawler\Crawler;
 
 abstract class FunctionalTestCase extends WebTestCase
 {
@@ -59,6 +59,4 @@ abstract class FunctionalTestCase extends WebTestCase
     //     $tagCount = $this->service(EntityManagerInterface::class)->getRepository(VideoGame::class)->countByTags($tagIds);
     //     return $tagCount;
     // }
-
-
 }
