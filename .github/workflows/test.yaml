@@ -11,7 +11,7 @@ jobs:
           - 5432:5432
         volumes:
           - postgres_db:/var/lib/postgresql/data
-        environment:
+        env:
           - POSTGRES_PASSWORD=postgres
           - POSTGRES_USER=postgres
     steps:
