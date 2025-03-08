@@ -88,6 +88,7 @@
             "php bin/console doctrine:fixtures:load -n --purge-with-truncate --env=test"
         ],
         "test": [
+            "php bin/console sass:build",
             "composer db-test",
             "php bin/phpunit"
         ],
