@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Tests\Functional\VideoGame;
 
 use App\Tests\Functional\FunctionalTestCase;
+use App\List\VideoGamesList;
+use App\Model\ValueObject;
 
 final class FilterTest extends FunctionalTestCase
 {
@@ -57,18 +59,18 @@ final class FilterTest extends FunctionalTestCase
     public function provideVideoGameTags(): array
     {
         return [
-            [['filter[tags][0]' => '7'], 15],
-            [['filter[tags][1]' => '8'], 25],
-            [['filter[tags][2]' => '9'], 18],
-            [['filter[tags][3]' => '10'], 13],
-            [['filter[tags][4]' => '11'], 19],
-            [['filter[tags][5]' => '12'], 21],
-            [['filter[tags][0]' => '7', 'filter[tags][1]' => '8'], 10],
-            [['filter[tags][0]' => '7', 'filter[tags][2]' => '9'], 4],
-            [['filter[tags][0]' => '7', 'filter[tags][5]' => '12'], 6],
-            [['filter[tags][0]' => '7', 'filter[tags][1]' => '8', 'filter[tags][2]' => '9'], 2],
-            [['filter[tags][0]' => '7', 'filter[tags][1]' => '8', 'filter[tags][3]' => '10'], 3],
-            [['filter[tags][0]' => '7', 'filter[tags][1]' => '8', 'filter[tags][2]' => '9', 'filter[tags][3]' => '10'], 0],
+            [['filter[tags][0]' => '1'], 10],
+            [['filter[tags][1]' => '2'], 12],
+            [['filter[tags][2]' => '3'], 14],
+            [['filter[tags][3]' => '4'], 21],
+            [['filter[tags][4]' => '5'], 17],
+            [['filter[tags][5]' => '6'], 20],
+            [['filter[tags][0]' => '1', 'filter[tags][1]' => '2'], 2],
+            [['filter[tags][0]' => '1', 'filter[tags][2]' => '3'], 4],
+            [['filter[tags][0]' => '1', 'filter[tags][5]' => '6'], 4],
+            [['filter[tags][0]' => '1', 'filter[tags][1]' => '2', 'filter[tags][2]' => '3'], 0],
+            [['filter[tags][0]' => '1', 'filter[tags][1]' => '2', 'filter[tags][3]' => '4'], 1],
+            [['filter[tags][0]' => '1', 'filter[tags][1]' => '2', 'filter[tags][2]' => '3', 'filter[tags][3]' => '4'], 0],
 
         ];
     }

@@ -5,19 +5,24 @@ declare(strict_types=1);
 namespace App\Tests\Functional;
 
 use App\Model\Entity\User;
+use App\Model\Entity\VideoGame;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\DomCrawler\Crawler;
+use App\Doctrine\Repository\VideoGameRepository;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\DomCrawler\Crawler;
 
 abstract class FunctionalTestCase extends WebTestCase
 {
     protected KernelBrowser $client;
 
+    // private VideoGameRepository $videoGameRepository;
+
     protected function setUp(): void
     {
         parent::setUp();
         $this->client = static::createClient();
+        // $this->videoGameRepository = self::getContainer()->get(VideoGameRepository::class);
     }
 
     protected function getEntityManager(): EntityManagerInterface
@@ -48,4 +53,12 @@ abstract class FunctionalTestCase extends WebTestCase
 
         $this->client->loginUser($user);
     }
+
+    // protected function tagCount($tagIds): int
+    // {
+    //     $tagCount = $this->service(EntityManagerInterface::class)->getRepository(VideoGame::class)->countByTags($tagIds);
+    //     return $tagCount;
+    // }
+
+
 }
