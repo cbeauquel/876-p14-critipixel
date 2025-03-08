@@ -28,7 +28,6 @@ final class VideoGameController extends AbstractController
         ListFactory $listFactory,
     ): Response {
         $videoGamesList = $listFactory->createVideoGamesList($pagination)->handleRequest($request);
-
         return $this->render('views/video_games/list.html.twig', ['list' => $videoGamesList]);
     }
 

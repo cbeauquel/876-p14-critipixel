@@ -66,7 +66,7 @@ final class VideoGamesList implements Countable, IteratorAggregate
             )
             ->handleRequest($request)
             ->createView();
-
+            // dd($this->form);
         $this->data = $this->videoGameRepository->getVideoGames($this->pagination, $this->filter);
 
         $this->pagination->init(count($this->data), count($this));

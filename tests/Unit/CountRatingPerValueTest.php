@@ -72,6 +72,14 @@ class CountRatingPerValueTest extends TestCase
                 'expectedFour' => 1,
                 'expectedFive' => 1,
             ],
+            'exemple 4' => [
+                'ratings' => [5, 5, 5, 5, 5],
+                'expectedOne' => 0,
+                'expectedTwo' => 0,
+                'expectedThree' => 0,
+                'expectedFour' => 0,
+                'expectedFive' => 5,
+            ],
         ];
     }
 }
