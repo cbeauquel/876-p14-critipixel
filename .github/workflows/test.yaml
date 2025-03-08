@@ -1,0 +1,57 @@
+name: Tests
+on: [push, pull_request]
+jobs: 
+  quality:
+    name: Tests
+    runs-on: ubuntu-latest
+    services:
+      database:
+        image: postgres:16-alpine
+        ports:
+          - 5432:5432
+        volumes:
+          - postgres_db:/var/lib/postgresql/data
+        environment:
+          - POSTGRES_PASSWORD=postgres
+          - POSTGRES_USER=postgres
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          tools: composer:v2
+
+      - name: Setup Cache
+        run: echo "COMPOSER_CACHE_DIR=$(composer config cache-dir)" >> $GITHUB_ENV
+
+      - name: Caching deps
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.COMPOSER_CACHE_DIR }}
+          key: php8.2-composer-${{ hashFiles('**/composer.json') }}
+          restore-keys: |
+            php8.2-composer-latest-
+
+      - name: Update composer
+        run: composer self-update
+
+      - name: install deps
+        run: composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader
+
+      - name: Prepare the database
+        run: sudo systemctl start mysql
+
+      - name: Tests
+        run: composer test
+        env:
+          APP_ENV: TEST
+          APP_DEBUG: true
+          XDEBUG_MODE: coverage
+          DATABASE_URL: "postgresql://postgres:postgres@127.0.0.1:5432/criti-pixel?serverVersion=16&charset=utf8"
+
+
+        
+    
