@@ -31,10 +31,13 @@ final class FilterTest extends FunctionalTestCase
 
     /**
      * @dataProvider provideVideoGameTags
-     * @param array<string|int> $tags
+     * @param array<int, array<int>> $tags
+     * @param array<int|string, int|string> $tagIds
      */
-    public function testShouldFilterVideoGamesByTag(array $tags, int $tagCount): void
+    public function testShouldFilterVideoGamesByTag(array $tags, array $tagIds): void
     {
+        // dd($tagIds);
+        $tagCount = $this->tagCount($tagIds);
         $this->get('/');
         $this->assertResponseIsSuccessful();
         $sort = $this->get('/')->selectButton('Trier')->form();
@@ -49,29 +52,27 @@ final class FilterTest extends FunctionalTestCase
             $tags,
             'GET'
         );
-
         $this->assertSelectorCount($tagCount, 'article.game-card');
     }
 
     /**
-    * @return array<int, array<int, array<string, string>|int>>
+    * @return array<int, array<int, array<int|string, int|string>>>
     */
     public function provideVideoGameTags(): array
     {
         return [
-            [['filter[tags][0]' => '1'], 10],
-            [['filter[tags][1]' => '2'], 12],
-            [['filter[tags][2]' => '3'], 14],
-            [['filter[tags][3]' => '4'], 21],
-            [['filter[tags][4]' => '5'], 17],
-            [['filter[tags][5]' => '6'], 20],
-            [['filter[tags][0]' => '1', 'filter[tags][1]' => '2'], 2],
-            [['filter[tags][0]' => '1', 'filter[tags][2]' => '3'], 4],
-            [['filter[tags][0]' => '1', 'filter[tags][5]' => '6'], 4],
-            [['filter[tags][0]' => '1', 'filter[tags][1]' => '2', 'filter[tags][2]' => '3'], 0],
-            [['filter[tags][0]' => '1', 'filter[tags][1]' => '2', 'filter[tags][3]' => '4'], 1],
-            [['filter[tags][0]' => '1', 'filter[tags][1]' => '2', 'filter[tags][2]' => '3', 'filter[tags][3]' => '4'], 0],
-
+            [['filter[tags][0]' => '1'], [1]],
+            [['filter[tags][1]' => '2'], [2]],
+            [['filter[tags][2]' => '3'], [3]],
+            [['filter[tags][3]' => '4'], [4]],
+            [['filter[tags][4]' => '5'], [5]],
+            [['filter[tags][5]' => '6'], [6]],
+            [['filter[tags][0]' => '1', 'filter[tags][1]' => '2'], [1, 2]],
+            [['filter[tags][0]' => '1', 'filter[tags][2]' => '3'], [1, 3]],
+            [['filter[tags][0]' => '1', 'filter[tags][5]' => '6'], [1, 6]],
+            [['filter[tags][0]' => '1', 'filter[tags][1]' => '2', 'filter[tags][2]' => '3'], [1, 2, 3]],
+            [['filter[tags][0]' => '1', 'filter[tags][1]' => '2', 'filter[tags][3]' => '4'], [1, 2, 4]],
+            [['filter[tags][0]' => '1', 'filter[tags][1]' => '2', 'filter[tags][2]' => '3', 'filter[tags][3]' => '4'], [1, 2, 3, 4]],
         ];
     }
 }

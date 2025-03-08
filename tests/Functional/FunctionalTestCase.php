@@ -16,13 +16,11 @@ abstract class FunctionalTestCase extends WebTestCase
 {
     protected KernelBrowser $client;
 
-    // private VideoGameRepository $videoGameRepository;
 
     protected function setUp(): void
     {
         parent::setUp();
         $this->client = static::createClient();
-        // $this->videoGameRepository = self::getContainer()->get(VideoGameRepository::class);
     }
 
     protected function getEntityManager(): EntityManagerInterface
@@ -54,9 +52,12 @@ abstract class FunctionalTestCase extends WebTestCase
         $this->client->loginUser($user);
     }
 
-    // protected function tagCount($tagIds): int
-    // {
-    //     $tagCount = $this->service(EntityManagerInterface::class)->getRepository(VideoGame::class)->countByTags($tagIds);
-    //     return $tagCount;
-    // }
+    /**
+     * @param int[] $tagIds
+     */
+    protected function tagCount($tagIds): int
+    {
+        $tagCount = $this->service(VideoGameRepository::class)->countVideoGamePerFilter($tagIds);
+        return $tagCount;
+    }
 }
