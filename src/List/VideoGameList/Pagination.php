@@ -31,10 +31,10 @@ final class Pagination implements IteratorAggregate, Countable
     private array $pages;
 
     public function __construct(
-        private int $page,
-        private int $limit,
-        private Sorting $sorting,
-        private Direction $direction
+        private readonly int $page,
+        private readonly int $limit,
+        private readonly Sorting $sorting,
+        private readonly Direction $direction
     ) {
     }
 
@@ -68,8 +68,9 @@ final class Pagination implements IteratorAggregate, Countable
 
     /**
      * @return Traversable<string, int>
+     * @return ArrayIterator
      */
-    public function getIterator(): Traversable
+    public function getIterator(): ArrayIterator
     {
         if (!$this->initialized) {
             throw new RuntimeException('Pagination is not initialized');
@@ -102,11 +103,17 @@ final class Pagination implements IteratorAggregate, Countable
         return $this->limit;
     }
 
+    /**
+     * @return (int|object)[]
+     */
     public function getDirections(): array
     {
         return Direction::cases();
     }
 
+    /**
+     * @return (int|object)[]
+     */
     public function getAllSorting(): array
     {
         return Sorting::cases();

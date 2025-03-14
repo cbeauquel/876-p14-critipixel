@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use App\Model\Entity\Review;
-use App\Rating\RatingHandler;
 use App\Model\Entity\VideoGame;
+use App\Rating\RatingHandler;
 use PHPUnit\Framework\TestCase;
 
 class CalculateAverageRatingTest extends TestCase
@@ -35,5 +35,4 @@ class CalculateAverageRatingTest extends TestCase
         $ratingHandler->calculateAverage($videoGame);
         $this->assertEquals(4, $videoGame->getAverageRating());
     }
-
 }

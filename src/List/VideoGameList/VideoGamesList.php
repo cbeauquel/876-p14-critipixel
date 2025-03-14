@@ -33,13 +33,16 @@ final class VideoGamesList implements Countable, IteratorAggregate
 
     private string $route;
 
+    /**
+     * @var (string)[]
+     */
     private array $routeParameters;
 
     public function __construct(
-        private UrlGeneratorInterface $urlGenerator,
-        private FormFactoryInterface $formFactory,
-        private VideoGameRepository $videoGameRepository,
-        private Pagination  $pagination,
+        private readonly UrlGeneratorInterface $urlGenerator,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly VideoGameRepository $videoGameRepository,
+        private readonly Pagination  $pagination,
     ) {
     }
 
@@ -48,7 +51,7 @@ final class VideoGamesList implements Countable, IteratorAggregate
         return $this->form;
     }
 
-      public function handleRequest(Request $request): self
+    public function handleRequest(Request $request): self
     {
         $this->filter = new Filter();
 
@@ -66,7 +69,7 @@ final class VideoGamesList implements Countable, IteratorAggregate
             )
             ->handleRequest($request)
             ->createView();
-            // dd($this->form);
+        // dd($this->form);
         $this->data = $this->videoGameRepository->getVideoGames($this->pagination, $this->filter);
 
         $this->pagination->init(count($this->data), count($this));

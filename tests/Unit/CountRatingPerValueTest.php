@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use App\Model\Entity\Review;
-use App\Rating\RatingHandler;
 use App\Model\Entity\VideoGame;
+use App\Rating\RatingHandler;
 use PHPUnit\Framework\TestCase;
 
 class CountRatingPerValueTest extends TestCase
@@ -12,7 +12,7 @@ class CountRatingPerValueTest extends TestCase
     public function testCountRatingsPerValueNoReviews(): void
     {
         $videoGame = new VideoGame();
-        $ratingHandler = new RatingHandler;
+        $ratingHandler = new RatingHandler();
 
         $ratingHandler->countRatingsPerValue($videoGame);
 
@@ -26,11 +26,12 @@ class CountRatingPerValueTest extends TestCase
 
     /**
      * @dataProvider provideRatingsData
+     * @param array<string|int> $ratings
      */
     public function testCountRatingsPerValueReviews(array $ratings, int $expectedOne, int $expectedTwo, int $expectedThree, int $expectedFour, int $expectedFive): void
     {
         $videoGame = new VideoGame();
-        $ratingHandler = new RatingHandler;
+        $ratingHandler = new RatingHandler();
 
         foreach ($ratings as $rating) {
             $videoGame->getReviews()->add((new Review())->setRating($rating));
@@ -45,6 +46,9 @@ class CountRatingPerValueTest extends TestCase
         $this->assertEquals($expectedFive, $videoGame->getNumberOfRatingsPerValue()->getNumberOfFive());
     }
 
+    /**
+    * @return array<string, array<string, int|list<int>>>
+    */
     public function provideRatingsData(): array
     {
         return [

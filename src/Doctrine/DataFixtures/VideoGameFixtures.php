@@ -2,19 +2,19 @@
 
 namespace App\Doctrine\DataFixtures;
 
-use Faker\Generator;
-use DateTimeImmutable;
+use App\Model\Entity\Review;
 use App\Model\Entity\Tag;
 use App\Model\Entity\User;
-use App\Model\Entity\Review;
 use App\Model\Entity\VideoGame;
-use function array_fill_callback;
-use App\Rating\CountRatingsPerValue;
 use App\Rating\CalculateAverageRating;
-
-use Doctrine\Persistence\ObjectManager;
+use App\Rating\CountRatingsPerValue;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+
+use Doctrine\Persistence\ObjectManager;
+use Faker\Generator;
+use function array_fill_callback;
 
 final class VideoGameFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -43,17 +43,17 @@ final class VideoGameFixtures extends Fixture implements DependentFixtureInterfa
 
         $videoGames = [];
         // $videoGames = array_fill_callback(0, 50, fn (int $index): VideoGame => (new VideoGame)
-        for($i = 0; $i < 50; $i++){
-        $videoGame = (new VideoGame())
-            ->setTitle(sprintf('Jeu vidéo %d', $i))
-            ->setDescription($this->faker->paragraphs(10, true))
-            ->setReleaseDate(new DateTimeImmutable())
-            ->setTest($this->faker->paragraphs(6, true))
-            ->setRating(($i % 5) + 1)
-            ->setImageName(sprintf('video_game_%d.png', $i))
-            ->setImageSize(2_098_872);
+        for ($i = 0; $i < 50; $i++) {
+            $videoGame = (new VideoGame())
+                ->setTitle(sprintf('Jeu vidéo %d', $i))
+                ->setDescription($this->faker->paragraphs(10, true))
+                ->setReleaseDate(new DateTimeImmutable())
+                ->setTest($this->faker->paragraphs(6, true))
+                ->setRating(($i % 5) + 1)
+                ->setImageName(sprintf('video_game_%d.png', $i))
+                ->setImageSize(2_098_872);
 
-            $randomTags = $this->faker->randomElements($tags, rand(1, 3));
+            $randomTags = $this->faker->randomElements($tags, random_int(1, 3));
             // Ajout aléatoire de tags
             foreach ($randomTags as $tag) {
                 $videoGame->addTag($tag);
@@ -72,7 +72,7 @@ final class VideoGameFixtures extends Fixture implements DependentFixtureInterfa
         $manager->flush();
 
         // TODO : Ajouter des reviews aux vidéos
-        for ($i = 0; $i < 75; $i++){
+        for ($i = 0; $i < 75; $i++) {
             $review = (new Review())
                 ->setUser($this->faker->randomElement($users))
                 ->setVideoGame($this->faker->randomElement($videoGames))
@@ -85,12 +85,9 @@ final class VideoGameFixtures extends Fixture implements DependentFixtureInterfa
 
 
             $manager->persist($review);
-
         }
 
         $manager->flush();
-
-
     }
 
     public function getDependencies(): array

@@ -17,7 +17,6 @@ final class ShowTest extends FunctionalTestCase
 
     public function testShouldAddReview(): void
     {
-        
         // Connexion de l'utilisateur
         $this->login();
                        
@@ -36,8 +35,8 @@ final class ShowTest extends FunctionalTestCase
         
         $this->client->followRedirect();
                
-        $this->assertSelectorTextContains('div.list-group-item:last-child h3','user+2');
-        $this->assertSelectorTextContains('div.list-group-item:last-child p','ceci est un test');
-        $this->assertSelectorTextContains('div.list-group-item:last-child span.value','2');
+        $this->assertSelectorTextContains('div.list-group-item:last-child h3', 'user+2');
+        $this->assertSelectorTextContains('div.list-group-item:last-child p', 'ceci est un test');
+        $this->assertSelectorTextContains('div.list-group-item:last-child span.value', '2');
     }
 }
